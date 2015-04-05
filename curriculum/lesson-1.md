@@ -1,8 +1,9 @@
-# Day One
+# Lesson One
 
 ### Objectives
 
 1. querySelector
+1. DOM, general concept
 1. variable
 1. css transition
 1. manipulation
