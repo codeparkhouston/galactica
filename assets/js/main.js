@@ -1,0 +1,1 @@
+var spaceship = document.querySelector('#spaceship');
