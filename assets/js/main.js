@@ -2,6 +2,7 @@
 
 var spaceship = document.querySelector('#spaceship');
 var beam = document.querySelector('.beam');
+var velocity = 20;
 
 function shootBeam(){
     var i = 0;
@@ -19,7 +20,7 @@ function moveTo(position){
 
 function moveLeft(){
     var currentPos = getPositionAsNumber(spaceship.style.left);
-    currentPos = currentPos - 50;
+    currentPos = currentPos - 20;
     if(currentPos < 0){
         return;
     }
@@ -28,7 +29,7 @@ function moveLeft(){
 
 function moveRight(){
     var currentPos = getPositionAsNumber(spaceship.style.left);
-    currentPos = currentPos + 50;
+    currentPos = currentPos + 20;
     if(currentPos > window.innerWidth){
         return;
     }    
@@ -54,13 +55,31 @@ function getPositionAsNumber(position){
 
 document.addEventListener('keydown', function(keyEvent){
     if(keyEvent.keyCode == 32){
-        shootBeam()
+        if(!actionsToRun.shootBeam){
+            actionsToRun.shootBeam = shootBeam;            
+        }
     }
     if(keyEvent.keyCode == 37){
-        moveLeft();
+        if(!actionsToRun.moveLeft){
+            actionsToRun.moveLeft = moveLeft;            
+        }
     }
     if(keyEvent.keyCode == 39){
-        moveRight();
+        if(!actionsToRun.moveRight){
+            actionsToRun.moveRight = moveRight;            
+        }
+    }
+});
+
+document.addEventListener('keyup', function(keyEvent){
+    if(keyEvent.keyCode == 32){
+        delete actionsToRun.shootBeam;
+    }
+    if(keyEvent.keyCode == 37){
+        delete actionsToRun.moveLeft;
+    }
+    if(keyEvent.keyCode == 39){
+        delete actionsToRun.moveRight;
     }
 });
 
@@ -68,3 +87,5 @@ document.addEventListener('keydown', function(keyEvent){
 spaceship.addEventListener('dragstart', function(dragEvent){
     dragEvent.preventDefault();
 });
+
+startLoop();
