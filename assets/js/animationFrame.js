@@ -1,6 +1,7 @@
 var spaceship = document.querySelector('#spaceship');
 var beam = document.querySelector('.beam');
 var start = null, pause = true;
+var actionsToRun = {};
 
 function endLoop(){
     beam.style.bottom = '100px';
@@ -8,11 +9,9 @@ function endLoop(){
 }
 
 function render(progress, deltaT){
-    var round, bottom;
-
-    round = progress % 100;
-    bottom = round * 7 + 100;
-    beam.style.bottom = bottom.toFixed(0) + 'px';
+    for (var actionName in actionsToRun) {
+        actionsToRun[actionName](spaceship, beam, progress, deltaT);
+    }
 }
 
 function startLoop(){

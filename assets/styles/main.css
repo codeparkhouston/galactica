@@ -10,8 +10,6 @@ body {
     bottom: 0;
     margin-left: -50px;
     cursor: pointer;
-    -webkit-transition: all 100ms ease-in-out;
-    transition:         all 100ms ease-in-out;
 }
 
 #spaceship .shell:after {
